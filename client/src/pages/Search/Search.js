@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import "./search.css";
 import Card from "../../components/Card/Card";
 import { Input, FormBtn } from "../../components/Form/Form";
+import API from "../../utils/Api";
 
 function Search() {
     const [formObject, setFormObject] = useState({})
@@ -11,9 +12,15 @@ function Search() {
         setFormObject({ ...formObject, [name]: value })
     };
 
+
+
     function handleFormSubmit(event) {
         event.preventDefault();
-        console.log(event)
+        const query = formObject.booksearch
+        API.search(query)
+       .then(res => console.log(res.data.items))
+       .catch(err => console.log(err));
+
     };
 
     return (
