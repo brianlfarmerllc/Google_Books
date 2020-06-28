@@ -6,7 +6,7 @@ import { Input, FormBtn } from "../../components/Form/Form";
 import API from "../../utils/Api";
 
 function Search() {
-    const initialForm = {booksearch:""}
+    const initialForm = { booksearch: "" }
     const [formObject, setFormObject] = useState(initialForm)
     const [googleBooks, setGoogleBooks] = useState([])
 
@@ -76,9 +76,9 @@ function Search() {
                     <h2 className="display-6 mt-2" style={{ textAlign: "center" }}>No Search Results</h2>
                 }
 
-                {googleBooks.map(book => {
-                    console.log(book.volumeInfo.authors)
-                    return (
+                {googleBooks.map(book => (
+
+
                     <Card
                         key={book.id}>
                         <BookCardContent
@@ -93,8 +93,8 @@ function Search() {
                             thumbnail={book.volumeInfo.imageLinks === undefined ? "https://placehold.it/130x180" : book.volumeInfo.imageLinks.thumbnail}
                         />
                     </Card>
-                )
-                    })}
+
+                ))}
             </Card>
         </div>
     )
