@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import "./search.css";
 import Card from "../../components/Card/Card";
+import BookCardContent from "../../components/BookCardContent/BookCardContent";
 import { Input, FormBtn } from "../../components/Form/Form";
 import API from "../../utils/Api";
 
@@ -30,18 +31,18 @@ function Search() {
             .then(res => saveBookToDb(res.data))
             .catch(err => console.log(err));
     }
-    
+
     function saveBookToDb(book) {
         const bookinfo = {
             title: book.volumeInfo.title,
             author: book.volumeInfo.authors.toString(),
-            synopsis: book.volumeInfo.subtitle  === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle,
+            synopsis: book.volumeInfo.subtitle === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle,
             description: book.volumeInfo.description,
             image: book.volumeInfo.imageLinks === undefined ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail,
             link: book.volumeInfo.infoLink,
         }
+        console.log(bookinfo)
         API.saveBook(bookinfo)
-            .then(res => setFormObject({}))
             .catch(err => console.log(err));
     }
 
@@ -72,40 +73,17 @@ function Search() {
                 {googleBooks.map(book => (
                     <Card
                         key={book.id}>
-                        <div className="row justify-content-between mt-3">
-                            <div className="col-7 col-lg-8 col-xl-10">
-                                <h5 className="" style={{ textAlign: "start" }}>{book.volumeInfo.title}</h5>
-                            </div>
-                            <div className="col">
-                                <a href={book.volumeInfo.infoLink} target="blank">
-                                    <button type="button"
-                                        className="btn btn-primary">View
-                                    </button>
-                                </a>
-                                <button type="button"
-                                    className="btn btn-success ml-2"
-                                    name={book.id}
-                                    onClick={saveBookInfo}>Save
-                                </button>
-                            </div>
-                        </div>
-                        <div className="row justify-content-between">
-                            <div className="col-8 col-md-10">
-                                <p style={{ textAlign: "start" }}>{book.volumeInfo.subtitle || "No Subtitle Available"}</p>
-                                <p style={{ textAlign: "start" }}>
-                                    Written By: {book.volumeInfo.authors.toString()}</p>
-                            </div>
-                        </div>
-                        <div className="row mt-4 justify-content-between">
-                            <div className="col">
-                                <img className="" alt={book.volumeInfo.title}
-                                    src={book.volumeInfo.imageLinks === undefined ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail}
-                                    style={{ textAlign: "start" }} />
-                            </div>
-                            <div className="col-8">
-                                <p className="" style={{ textAlign: "start" }}>{book.volumeInfo.description}</p>
-                            </div>
-                        </div>
+                        <BookCardContent
+                            id={book.id}
+                            title={book.volumeInfo.title}
+                            infoLink={book.volumeInfo.infoLink}
+                            saveBook={saveBookInfo}
+                            saveBookText={"Save"}
+                            subtitle={book.volumeInfo.subtitle}
+                            authors={book.volumeInfo.authors.toString()}
+                            description={book.volumeInfo.description}
+                            thumbnail={book.volumeInfo.imageLinks === undefined ? "https://placehold.it/130x180" : book.volumeInfo.imageLinks.thumbnail}
+                        />
                     </Card>
                 ))}
             </Card>
