@@ -2,12 +2,15 @@ import axios from "axios";
 
 
 const BASEURL = "https://www.googleapis.com/books/v1/volumes?q=";
+const IDBASEURL = "https://www.googleapis.com/books/v1/volumes/";
 
 export default {
 
     search: function (query) {
-        console.log(query)
         return axios.get(BASEURL + query);
+    },
+    searchById: function (id) {
+        return axios.get(IDBASEURL + id);
     },
     // Gets all books
     getBooks: function () {
