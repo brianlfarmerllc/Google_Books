@@ -39,7 +39,10 @@ function Saved() {
                 <p className="lead" style={{ textAlign: "center" }}>View all your saved books</p>
             </Card>
             <Card>
-                <h2 className="display-6 mt-2" style={{ textAlign: "start" }}>Saved Books</h2>
+            {books.length ?
+                    <h2 className="display-6 mt-2" style={{ textAlign: "start" }}>Saved Books</h2> :
+                    <h2 className="display-6 mt-2" style={{ textAlign: "center" }}>Currently No Saved Books</h2>
+                }
                 {books.map(book => (
                     <Card
                         key={book._id}

@@ -27,6 +27,7 @@ function Search() {
     function saveBookInfo(event) {
         event.preventDefault();
         const bookId = event.target.name
+        console.log(bookId)
         API.searchById(bookId)
             .then(res => saveBookToDb(res.data))
             .catch(err => console.log(err));
@@ -35,7 +36,7 @@ function Search() {
     function saveBookToDb(book) {
         const bookinfo = {
             title: book.volumeInfo.title === undefined ? "No Title Available" : book.volumeInfo.title,
-            author: book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors,
+            author: book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors.toString(),
             synopsis: book.volumeInfo.subtitle === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle,
             description: book.volumeInfo.description === undefined ? "No Description Available" : book.volumeInfo.description,
             image: book.volumeInfo.imageLinks === undefined ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail,
@@ -43,6 +44,7 @@ function Search() {
         }
         console.log(bookinfo)
         API.saveBook(bookinfo)
+            .then(() => setFormObject({}))
             .catch(err => console.log(err));
     }
 
