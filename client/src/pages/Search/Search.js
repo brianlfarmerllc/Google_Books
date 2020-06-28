@@ -66,13 +66,14 @@ function Search() {
                         <div className="row justify-content-between">
                             <div className="col-8">
                                 <p style={{ textAlign: "start" }}>{book.volumeInfo.subtitle || "No Subtitle Available"}</p>
-                                <p style={{ textAlign: "start" }}>Written By: {[book.volumeInfo.authors]}</p>
+                                <p style={{ textAlign: "start" }}>
+                                    Written By: {book.volumeInfo.authors.toString()}</p>
                             </div>
                         </div>
                         <div className="row mt-4 justify-content-between">
                             <div className="col">
-                                <img className="" 
-                                src={book.volumeInfo.imageLinks.thumbnail === "undefined" ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail} 
+                                <img className="" alt={book.volumeInfo.title}
+                                src={book.volumeInfo.imageLinks === undefined ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail} 
                                 style={{ textAlign: "start" }}/>
                             </div>
                             <div className="col-8">
