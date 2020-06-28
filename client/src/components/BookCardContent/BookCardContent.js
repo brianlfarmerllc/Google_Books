@@ -24,7 +24,7 @@ function BookCardContent(props) {
                 <div className="col-8 col-md-10">
                     <p style={{ textAlign: "start" }}>{props.subtitle || "No Subtitle Available"}</p>
                     <p style={{ textAlign: "start" }}>
-                        Written By: {props.authors}</p>
+                        Written By: {props.authors.join(", ")}</p>
                 </div>
             </div>
             <div className="row mt-4 justify-content-between">

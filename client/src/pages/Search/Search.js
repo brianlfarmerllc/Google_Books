@@ -6,7 +6,8 @@ import { Input, FormBtn } from "../../components/Form/Form";
 import API from "../../utils/Api";
 
 function Search() {
-    const [formObject, setFormObject] = useState({})
+    const initialForm = {booksearch:""}
+    const [formObject, setFormObject] = useState(initialForm)
     const [googleBooks, setGoogleBooks] = useState([])
 
     function handleInputChange(event) {
@@ -19,7 +20,7 @@ function Search() {
         const query = formObject.booksearch
         API.search(query)
             .then(res => setGoogleBooks(res.data.items))
-            .then(() => setFormObject({}))
+            .then(() => setFormObject(initialForm))
             .catch(err => console.log(err));
 
     };
@@ -36,15 +37,13 @@ function Search() {
     function saveBookToDb(book) {
         const bookinfo = {
             title: book.volumeInfo.title === undefined ? "No Title Available" : book.volumeInfo.title,
-            author: book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors.toString(),
+            authors: book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors,
             synopsis: book.volumeInfo.subtitle === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle,
             description: book.volumeInfo.description === undefined ? "No Description Available" : book.volumeInfo.description,
             image: book.volumeInfo.imageLinks === undefined ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail,
             link: book.volumeInfo.infoLink === undefined ? "No Link Available" : book.volumeInfo.infoLink,
         }
-        console.log(bookinfo)
         API.saveBook(bookinfo)
-            .then(() => setFormObject({}))
             .catch(err => console.log(err));
     }
 
@@ -58,6 +57,7 @@ function Search() {
                 <form>
                     <h2 className="display-5 mb-4" style={{ textAlign: "start" }}>Book Search</h2>
                     <Input
+                        value={formObject.booksearch || ''}
                         onChange={handleInputChange}
                         name="booksearch"
                         placeholder="Book Keyword (required)"
@@ -76,7 +76,9 @@ function Search() {
                     <h2 className="display-6 mt-2" style={{ textAlign: "center" }}>No Search Results</h2>
                 }
 
-                {googleBooks.map(book => (
+                {googleBooks.map(book => {
+                    console.log(book.volumeInfo.authors)
+                    return (
                     <Card
                         key={book.id}>
                         <BookCardContent
@@ -86,12 +88,13 @@ function Search() {
                             saveBook={saveBookInfo}
                             saveBookText={"Save"}
                             subtitle={book.volumeInfo.subtitle === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle}
-                            authors={book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors}
+                            authors={book.volumeInfo.authors === undefined ? [] : book.volumeInfo.authors}
                             description={book.volumeInfo.description === undefined ? "No Description Available" : book.volumeInfo.description}
                             thumbnail={book.volumeInfo.imageLinks === undefined ? "https://placehold.it/130x180" : book.volumeInfo.imageLinks.thumbnail}
                         />
                     </Card>
-                ))}
+                )
+                    })}
             </Card>
         </div>
     )
