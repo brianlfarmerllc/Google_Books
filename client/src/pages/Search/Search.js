@@ -34,12 +34,12 @@ function Search() {
 
     function saveBookToDb(book) {
         const bookinfo = {
-            title: book.volumeInfo.title,
-            author: book.volumeInfo.authors.toString(),
+            title: book.volumeInfo.title === undefined ? "No Title Available" : book.volumeInfo.title,
+            author: book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors,
             synopsis: book.volumeInfo.subtitle === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle,
-            description: book.volumeInfo.description,
+            description: book.volumeInfo.description === undefined ? "No Description Available" : book.volumeInfo.description,
             image: book.volumeInfo.imageLinks === undefined ? "https://placehold.it/200x200" : book.volumeInfo.imageLinks.thumbnail,
-            link: book.volumeInfo.infoLink,
+            link: book.volumeInfo.infoLink === undefined ? "No Link Available" : book.volumeInfo.infoLink,
         }
         console.log(bookinfo)
         API.saveBook(bookinfo)
@@ -69,19 +69,23 @@ function Search() {
                 </form>
             </Card>
             <Card>
-                <h2 className="display-6 mt-2" style={{ textAlign: "start" }}>Search Results</h2>
+                {googleBooks.length ?
+                    <h2 className="display-6 mt-2" style={{ textAlign: "start" }}>Search Results</h2> :
+                    <h2 className="display-6 mt-2" style={{ textAlign: "center" }}>No Search Results</h2>
+                }
+
                 {googleBooks.map(book => (
                     <Card
                         key={book.id}>
                         <BookCardContent
                             id={book.id}
-                            title={book.volumeInfo.title}
-                            infoLink={book.volumeInfo.infoLink}
+                            title={book.volumeInfo.title === undefined ? "No Title Available" : book.volumeInfo.title}
+                            infoLink={book.volumeInfo.infoLink === undefined ? "No Link Available" : book.volumeInfo.infoLink}
                             saveBook={saveBookInfo}
                             saveBookText={"Save"}
-                            subtitle={book.volumeInfo.subtitle}
-                            authors={book.volumeInfo.authors.toString()}
-                            description={book.volumeInfo.description}
+                            subtitle={book.volumeInfo.subtitle === undefined ? "No Subtitle Available" : book.volumeInfo.subtitle}
+                            authors={book.volumeInfo.authors === undefined ? "No Author Information Available" : book.volumeInfo.authors}
+                            description={book.volumeInfo.description === undefined ? "No Description Available" : book.volumeInfo.description}
                             thumbnail={book.volumeInfo.imageLinks === undefined ? "https://placehold.it/130x180" : book.volumeInfo.imageLinks.thumbnail}
                         />
                     </Card>
