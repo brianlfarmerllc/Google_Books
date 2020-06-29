@@ -16,12 +16,6 @@ nav a {
   #header h1{
     text-align: center;
   }
-  
-  #header nav span {
-    margin-top: 0.5em;
-    font-family: 'Merriweather', serif;
-    color: dodgerblue;
-  }
 
   @media (max-width: 900px) {
     #header nav {

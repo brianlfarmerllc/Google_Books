@@ -12,8 +12,7 @@ function Logo() {
             <span style={{ 
                 fontFamily: "Source Sans Pro, sans-serif", 
                 fontSize: "xx-large", 
-                color: "#4285F4"  }}
-                > Books</span></h1>
+                color: "#4285F4"  }}> Books</span></h1>
         </div>
     )
 }

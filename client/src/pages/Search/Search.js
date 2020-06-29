@@ -77,8 +77,6 @@ function Search() {
                 }
 
                 {googleBooks.map(book => (
-
-
                     <Card
                         key={book.id}>
                         <BookCardContent
