@@ -3,7 +3,7 @@
 
   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/brianlfarmerllc/Google_Books)
 
-  [![Heroku URL](https://img.shields.io/badge/Heroku-URL-purple.svg)](https://github.com/brianlfarmerllc/Google_Books)
+  [![Heroku URL](https://img.shields.io/badge/Heroku-URL-purple.svg)](https://gbooks-search-brianlfarmerllc.herokuapp.com/)
   
   ## Description
 
