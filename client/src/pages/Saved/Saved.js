@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import "./saved.css";
 import Card from "../../components/Card/Card";
 import BookCardContent from "../../components/BookCardContent/BookCardContent";
 import API from "../../utils/Api";
@@ -34,13 +33,12 @@ function Saved() {
 
     return (
         <div className="container-fluid mb-5">
-            <Card>
+            <div className="pt-5 pb-5">
                 <h2 className="display-4" style={{ textAlign: "center" }}>React Built Google Books Search</h2>
                 <p className="lead" style={{ textAlign: "center" }}>View all your saved books</p>
-            </Card>
-            <Card>
+            </div>
             {books.length ?
-                    <h2 className="display-6 mt-2" style={{ textAlign: "start" }}>Saved Books</h2> :
+                    <h2 className="display-6 mt-2 pb-3" style={{ textAlign: "center" }}>Saved Books</h2> :
                     <h2 className="display-6 mt-2" style={{ textAlign: "center" }}>Currently No Saved Books</h2>
                 }
                 {books.map(book => (
@@ -61,7 +59,6 @@ function Saved() {
                         />
                     </Card>
                 ))}
-            </Card>
         </div>
     )
 }

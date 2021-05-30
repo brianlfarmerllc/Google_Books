@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import "./search.css";
 import Card from "../../components/Card/Card";
 import BookCardContent from "../../components/BookCardContent/BookCardContent";
 import { Input, FormBtn } from "../../components/Form/Form";
@@ -49,10 +48,10 @@ function Search() {
 
     return (
         <div className="container-fluid">
-            <Card>
+            <div className="pt-5 pb-5">
                 <h2 className="display-4" style={{ textAlign: "center" }}>React Built Google Books Search</h2>
                 <p className="lead" style={{ textAlign: "center" }}>Search for and save books of interest</p>
-            </Card>
+            </div>
             <Card>
                 <form>
                     <h2 className="display-5 mb-4" style={{ textAlign: "start" }}>Book Search</h2>
@@ -70,10 +69,10 @@ function Search() {
                     </FormBtn>
                 </form>
             </Card>
-            <Card>
+            {/* <Card> */}
                 {googleBooks.length ?
-                    <h2 className="display-6 mt-2" style={{ textAlign: "start" }}>Search Results</h2> :
-                    <h2 className="display-6 mt-2" style={{ textAlign: "center" }}>No Search Results</h2>
+                    <h2 className="display-6 mt-2 pt-4 pb-3" style={{ textAlign: "center" }}>Search Results</h2> :
+                    <h2 className="display-6 mt-2 pt-4" style={{ textAlign: "center" }}>No Search Results</h2>
                 }
 
                 {googleBooks.map(book => (
@@ -93,7 +92,7 @@ function Search() {
                     </Card>
 
                 ))}
-            </Card>
+            {/* </Card> */}
         </div>
     )
 }
