@@ -1,57 +1,108 @@
+# MERN Stack - Google Books API Search
 
-  # Google_Books
+This is a project built with the MERN stack utilizing the Google Books API to search and save book titles.
 
-  [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/brianlfarmerllc/Google_Books)
+## Table of contents
 
-  [![Heroku URL](https://img.shields.io/badge/Heroku-URL-purple.svg)](https://gbooks-search-brianlfarmerllc.herokuapp.com/)
-  
-  ## Description
+- [Overview](#overview)
+- [The challenge](#the-challenge)
+- [Screenshot](#screenshot)
+- [Links](#links)
+- [My process](#my-process)
+- [Built with](#built-with)
+- [What I learned](#what-i-learned)
+- [Continued development](#continued-development)
+- [Useful resources](#useful-resources)
+- [Author](#author)
 
-  This application was built using a MERN stack. The application allows users to search for books in the Google Books API by keying in a Author or Title into the search bar. You can view a book returned in the search by clicking the view button or save the book to your favories by clicking the save button. In the saved books section you can view all your saved books as well as delete books from your saved favorites with the delete button. Gif below displays the intended usage. 
+## Overview
 
-  ## Table of Contents
-  
-  * [Installation](#Installation)
-  * [Test](#Test)
-  * [Usage](#Usage)
-  * [Technologies](#Technologies)
-  * [License](#License)
-  * [Contributions](#Contributions)
-  
-  ## Installation
+### The challenge
 
-  Clone repository to your local machine then run npm install. To run on local server, "npm start" and vist site at localhost:3000. Application requires MongoDB to be run locally. 
+Users should be able to:
 
-  ## Test
+- Search for titles or authors via the Google Books API and render them in the search results. 
+- "View" a book, bringing them to the book on Google Books
+- "Save" a book, saving it to the Mongo database
+- Renders all books saved to the Mongo database in the saved section
+- "Delete" a book, removing it from the Mongo database.
 
-  Test connectivity to your data base by running npm run seed. 
 
-  ## Usage
+### Screenshot
 
-  The following image demonstrates the application functionality:
+![](./assets/gbooks-search.png)
 
-  ![Google_Books_Demo](./assets/google_books.gif)
+### Links
 
-  ## Technologies
+- GitHub URL: [GitHub URL here](https://github.com/brianlfarmerllc/Google_Books)
+- Live Site URL: [Live site URL here](https://gbooks-search-brianlfarmerllc.herokuapp.com/)
 
-  The following technologies were used in the developement of the application
+## My process
 
-  Heroku,<br>React,<br>HTML5,<br>CSS,<br>Node.js,<br>Express,<br>Mongo and Mongoose,<br>Bootstrap
+### Built with
 
-  ## License
+- M.E.R.N. Stack
+- Mongo DB with Mongoose  
+- Express.Js   
+- React.Js
+- Node.Js
+- Semantic HTML5 markup
+- CSS3 Styling
+- Bootstrap 4
+- Axios
+- JSX Functionality
+- MVC File Structure
 
-  This application is licensed under the MIT license
+### What I learned
 
-  ## Contributors
+This was my first introduction to creating an application using the complete MERN stack. Before this project I did not have a lot of experience using react with a back-end server and this was my first introduction into tying all the parts together. I really tried to focus on creating a clean and readable code base and file structure for the controllers, models, routes, client, and server. 
 
-  Contributor information and commit history can be seen here!
-  <a href="https://github.com/https://github.com/brianlfarmerllc/Google_Books/graphs/contributors">
-    <img src="https://contributors-img.web.app/image?repo=brianlfarmerllc/Google_Books" />
-  </a>
+![](./assets/files.png)
 
-  Made with [contributors-img](https://contributors-img.web.app).
+By creating controllers, I was able to create and reuse the CRUD functions called by the routes.    
 
-  ## Questions
+```js
+module.exports = {
+  findAll: function (req, res) {
+    db.Book.find(req.query)
+      .sort({ date: -1 })
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  findById: function (req, res) {
+    db.Book.findById(req.params.id)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  create: function (req, res) {
+    db.Book.create(req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  update: function (req, res) {
+    db.Book.findOneAndUpdate({ _id: req.params.id }, req.body)
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+  remove: function (req, res) {
+    db.Book.findById({ _id: req.params.id })
+      .then((dbModel) => dbModel.remove())
+      .then((dbModel) => res.json(dbModel))
+      .catch((err) => res.status(422).json(err));
+  },
+};
+```
 
-  If you have any questions about the application you can contact brianlfarmerllc directly @ brianlfarmerllc@gmail.com
-  
+### Continued development
+
+There are numerous frameworks out there but for the time being I intend to focus on learning more about React and how I can further work to build reusable components and manage state in more advanced ways. 
+
+### Useful resources
+
+[React Documentation](https://reactjs.org/docs/getting-started.html/) - I am a big believer in documentation and the React team did and excellent job putting theirs together. Easy to read and digest and super instructive for beginners.
+
+## Author
+
+- Website - [Brian Farmer](https://brianlfarmerllc-biosite.netlify.app/)
+- GitHub URL: - [GitHub URL](https://github.com/brianlfarmerllc)
+
