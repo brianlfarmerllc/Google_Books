@@ -103,6 +103,6 @@ There are numerous frameworks out there but for the time being I intend to focus
 
 ## Author
 
-- Website - [Brian Farmer](https://brianlfarmerllc-biosite.netlify.app/)
+- Website - [Portfolio Site](https://brianfarmerwebdev.netlify.app)
 - GitHub URL: - [GitHub URL](https://github.com/brianlfarmerllc)
 
